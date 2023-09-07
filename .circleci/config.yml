@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  check-machine:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run:
+          name: Check CPU architecture on machine executor
+          command: |
+            uname -m
+            lscpu
+            cat /etc/*release
+
+  check-docker:
+    docker:
+      - image: openeuler/openeuler:22.03-lts-sp2
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run:
+          name: Check CPU architecture on Docker executor
+          command: |
+            uname -m
+            lscpu
+            cat /etc/*release
+
+workflows:
+  build:
+    jobs:
+      - check-machine
+      - check-docker
