@@ -24,8 +24,8 @@ jobs:
           name: Check CPU architecture on Docker executor
           command: |
             uname -m
-            dnf install -y util-linux            # for lscpu
-            lscpu
+            # dnf install -y util-linux            # for lscpu
+            # lscpu
             cat /etc/*release
 
 workflows:
